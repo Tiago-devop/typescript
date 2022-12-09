@@ -1,18 +1,13 @@
-let total: number;
-const porcentagem = 20;
-function handleChange(event: HTMLInputElement) {
-  console.log(event.value);
-  total = +event.value;
-  if (p) {
-    p.innerText = "Resultado:";
+const toNumber = (num: number | string) => {
+  if (typeof num === "number") {
+    return num;
+  } else if (typeof num === "string") {
+    return +num;
+  } else {
+    throw new Error("value must be a number or a string");
   }
-}
+};
 
-let p = document.querySelector("p");
-console.log(p);
-
-function calcular() {
-  if (p) {
-    p.innerText = `Resultado: ${total - 100 * (porcentagem / 100)}`;
-  }
-}
+console.log(toNumber(10));
+console.log(toNumber("10"), typeof toNumber("10"));
+console.log(toNumber(true));
