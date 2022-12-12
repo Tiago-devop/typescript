@@ -1,17 +1,16 @@
 "use strict";
-let total;
-const porcentagem = 20;
-function handleChange(event) {
-    console.log(event.value);
-    total = +event.value;
-    if (p) {
-        p.innerText = "Resultado:";
-    }
-}
-let p = document.querySelector("p");
-console.log(p);
-function calcular() {
-    if (p) {
-        p.innerText = `Resultado: ${total - 100 * (porcentagem / 100)}`;
-    }
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_fetch_1 = require("node-fetch");
+const fetchProduct = async () => {
+    const response = await (0, node_fetch_1.default)("https://api.origamid.dev/json/notebook.json");
+    const data = await response.json();
+    showProduct(data);
+};
+fetchProduct();
+function showProduct(data) {
+    document.body.innerHTML = `
+    <div>
+      <h2>${data.nome}</h2>
+    </div>
+  `;
 }

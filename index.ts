@@ -1,18 +1,31 @@
-let total: number;
-const porcentagem = 20;
-function handleChange(event: HTMLInputElement) {
-  console.log(event.value);
-  total = +event.value;
-  if (p) {
-    p.innerText = "Resultado:";
-  }
+import fetch from "node-fetch";
+
+const fetchProduct = async () => {
+  const response = await fetch("https://api.origamid.dev/json/notebook.json");
+  const data = await response.json();
+  showProduct(data as IData);
+};
+
+fetchProduct();
+interface Company {
+  nome: string;
+  fundacao: number;
+  pais: string;
+}
+interface IData {
+  nome: string;
+  preco: number;
+  descricao: string;
+  garantia: string;
+  seguroAcidentes: boolean;
+  empresaFabricante: Company;
+  empresaMontadora: Company;
 }
 
-let p = document.querySelector("p");
-console.log(p);
-
-function calcular() {
-  if (p) {
-    p.innerText = `Resultado: ${total - 100 * (porcentagem / 100)}`;
-  }
+function showProduct(data: IData) {
+  document.body.innerHTML = `
+    <div>
+      <h2>${data.nome}</h2>
+    </div>
+  `;
 }
